@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbento-a <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbento-a <bbento-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:51:29 by bbento-a          #+#    #+#             */
-/*   Updated: 2024/04/23 17:10:51 by bbento-a         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:08:14 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <limits.h>
-# include "printf.h"
+# include "ft_printf.h"
 
 //Part 1
 int		ft_isalpha(int c);
