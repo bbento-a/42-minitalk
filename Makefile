@@ -6,7 +6,7 @@
 #    By: bbento-a <bbento-a@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 10:46:49 by bbento-a          #+#    #+#              #
-#    Updated: 2024/05/14 12:05:09 by bbento-a         ###   ########.fr        #
+#    Updated: 2024/05/20 10:26:06 by bbento-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,11 @@ CFLAGS				= -Wall -Werror -Wextra -g
 RM					= rm -f
 
 # Source Files
-SRC_S		=	$(SRC_DIR)server.c
-SRC_C		=	$(SRC_DIR)client.c
+SRC_S		=	$(SRC_DIR)server.c \
+				$(SRC_DIR)utils.c
+				
+SRC_C		=	$(SRC_DIR)client.c \
+				$(SRC_DIR)utils.c
 
 # Apply the pattern substitution to each source file in SRC and produce a corresponding list of object files in the OBJ_DIR
 OBJ_S 				= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC_S))

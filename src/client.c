@@ -6,17 +6,32 @@
 /*   By: bbento-a <bbento-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:59:50 by bbento-a          #+#    #+#             */
-/*   Updated: 2024/05/15 12:30:22 by bbento-a         ###   ########.fr       */
+/*   Updated: 2024/05/20 12:39:14 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void    send_bit(int )
-{}
+//  Function to convert bits to a char
+char    bits_tochar(char *bits)
+{
+    
+}
+
+void    send_msg(int pid, char *msg)
+{
+    int i;
+
+    while (msg[i] != '\0')
+    {
+        bit__tochar();
+        ft_addchar(msg, msg[i]);
+    }
+}
 
 int main(int argc, char **argv)
 {
+    int pid;
     int i;
 
     i = -1;
@@ -25,14 +40,6 @@ int main(int argc, char **argv)
     while (argv[1][++i])
         if (!ft_isdigit(argv[1][i]))
             error_occurrence();
-    ft_printf("PID SIGUSR1:\n", getpid(SIGUSR1));
     
-            
-}
-
-void    error_occurrence(void)
-{
-    ft_printf("Error: Invalid use of parameters\n");
-    ft_printf("Correct usage: ./client <Server's PID> <Message>\n");
-    exit(1);
+    send_msg(getpid, argv[2]);
 }
