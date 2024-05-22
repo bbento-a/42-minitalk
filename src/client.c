@@ -12,6 +12,25 @@
 
 #include "minitalk.h"
 
+//  Sends the length of the message the client is sending to the server
+
+void    send_msg_len(int pid, char *msg)
+{
+    int len;
+    int bits;
+
+    len = 0;
+    bits = 7;
+    while(msg[len] != '\0')
+        len++;
+    while (bits >= 0)
+    {
+        if ((len >> bits) & 1)
+            kill(pid, SIGUSR2);
+        bits--;
+    }
+}
+
 void    send_msg(int pid, char *msg)
 {
     static int bits;
@@ -19,19 +38,15 @@ void    send_msg(int pid, char *msg)
 
     i = 0;
     bits = 7;
+    send_msg_len(pid, msg);
     while (msg[i] != '\0')
     {
         while (bits >= 0)
         {
-            if (msg[i] << bits & 1)
+            if ((msg[i] >> bits) & 1)
             {
-                printf("%d", msg[i] >> bits);
+                ft_printf("hh%i\n", msg[i] >> bits);
                 kill(pid, SIGUSR1);
-            }
-            else if (msg[i] << bits & 0)
-            {
-                printf("%d", msg[i] >> bits);
-                kill(pid, SIGUSR2);
             }
             bits--;
         }
@@ -48,9 +63,10 @@ int main(int argc, char **argv)
     if (argc != 3 || !argv[1][0] || !argv[2][0])
         error_occurrence();
     i = -1;
-    pid = ft_atoi(argv[1]);
     while (argv[1][++i])
         if (!ft_isdigit(argv[1][i]))
             error_occurrence();
+    pid = ft_atoi(argv[1]);
+
     send_msg(pid, argv[2]);
 }

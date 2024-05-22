@@ -12,18 +12,46 @@
 
 #include "minitalk.h"
 
+// 1 global variable used in server file for 
+int gmsg_len;
+
+void   get_msg_len(int signal)
+{
+    static int  len;
+    static int  bits;
+
+    bits = 0;
+    if (signal == 1)
+        len = 1 << bits;
+    if (bits++ == 7)
+    {
+        gmsg_len = len;
+        len = 0;
+        bits = 0;
+        ft_printf("lenght: %i\n", gmsg_len);
+    }
+}
+
 void    get_bit(int signal)
 {
     static int  bits; // bit shifter posistion
     static int  c; // bit storage
-    
+    static char *msg;
+    static int  i;
+
     bits = 0;
+    i = 0;
     if (signal == 1)
         c = 1 << bits;
     if (bits++ == 7)
     {
-        write(1, &c, 1);
-        bits = 0;       
+        msg[i++] = c;
+        bits = 0;
+    }
+    if (i == (gmsg_len + 1))
+    {
+        ft_putstr_fd(msg, 1);
+        ft_memset(msg, 0, gmsg_len);
     }
 }
 
@@ -38,7 +66,7 @@ int main(int argc, char **argv)
 
     // Setting up signal handlers
     signal(SIGUSR1, get_bit);
-    signal(SIGUSR2, get_bit);
+    signal(SIGUSR2, get_msg_len);
 
     // Loop for the process to run
     while(1)
