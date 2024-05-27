@@ -14,43 +14,43 @@
 
 //  Sends the length of the message the client is sending to the server
 
-void    send_msg_len(int pid, char *msg)
-{
-    int len;
-    int bits;
+// void    send_msg_len(int pid, char *msg)
+// {
+//     int len;
+//     int bits;
 
-    len = 0;
-    bits = 7;
-    while(msg[len] != '\0')
-        len++;
-    while (bits >= 0)
-    {
-        if ((len >> bits) & 1)
-            kill(pid, SIGUSR2);
-        bits--;
-    }
-}
+//     len = 0;
+//     bits = 7;
+//     while(msg[len] != '\0')
+//         len++;
+//     while (bits >= 0)
+//     {
+//         if ((len >> bits) & 1)
+//             kill(pid, SIGUSR2);
+//         bits--;
+//     }
+// }
 
 void    send_msg(int pid, char *msg)
 {
-    static int bits;
+    int bits;
     int i;
 
     i = 0;
-    bits = 7;
-    send_msg_len(pid, msg);
+    bits = 8;
+    // send_msg_len(pid, msg);
     while (msg[i] != '\0')
     {
-        while (bits >= 0)
+        while (bits > 0)
         {
             if ((msg[i] >> bits) & 1)
-            {
-                ft_printf("hh%i\n", msg[i] >> bits);
                 kill(pid, SIGUSR1);
-            }
+            else
+                kill(pid, SIGUSR2);
+            usleep(50);
             bits--;
         }
-        bits = 7;
+        bits = 8;
         i++;
     }
 }
