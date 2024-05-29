@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:01:04 by bbento-a          #+#    #+#             */
-/*   Updated: 2024/05/28 18:03:51 by bbento-a         ###   ########.fr       */
+/*   Updated: 2024/05/29 17:11:17 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	get_bit(int signal)
 
 int	main(int argc, char **argv)
 {
+	signal(SIGINT, exit);
 	if (argc != 1 || !argv)
 		exit(1);
 	ft_printf("---Starting Server---\nServer's PID Number: ");

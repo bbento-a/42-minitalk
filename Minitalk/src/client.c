@@ -6,7 +6,7 @@
 /*   By: bbento-a <bbento-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:59:50 by bbento-a          #+#    #+#             */
-/*   Updated: 2024/05/28 18:25:19 by bbento-a         ###   ########.fr       */
+/*   Updated: 2024/05/29 17:11:13 by bbento-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	send_msg(int pid, char *msg)
 				kill(pid, SIGUSR1);
 			else
 				kill(pid, SIGUSR2);
-			usleep(100);
+			usleep(50);
 			bits++;
 		}
 		bits = 0;
@@ -40,7 +40,8 @@ int	main(int argc, char **argv)
 	int	pid;
 	int	i;
 
-	if (argc != 3)
+	signal(SIGINT, exit);
+	if (argc != 3 || !(argv[1][0]) || !(argv[2][0]))
 		error_occurrence();
 	i = -1;
 	while (argv[1][++i])
